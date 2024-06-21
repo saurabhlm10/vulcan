@@ -48,6 +48,7 @@ interface NichePage {
     name: string;
     stage: string;
     nicheId: string;
+    followersCount: number;
 }
 
 interface Stage {
@@ -121,6 +122,9 @@ export const lambdaHandler = async (event: SQSEvent): Promise<APIGatewayProxyRes
         // Sort Posts According to originalViews
 
         postsFilteredByPreviousMonth.sort((a, b) => b.originalViews - a.originalViews);
+
+        // Sort Pages by followersCount
+        nichePages.sort((a, b) => b.followersCount - a.followersCount);
 
         let currentPageNumber = 0;
 
